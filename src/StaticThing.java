@@ -6,7 +6,7 @@ public class StaticThing {
     private double y;
     public ImageView imageView;
 
-    public StaticThing(String fileName,double x,double y){
+    public StaticThing(String fileName,double x,double y,double sizex,double sizey){
         this.imageView=new ImageView(new Image(fileName));
         this.x=x;
         this.y=y;

@@ -29,19 +29,19 @@ public class GameScene extends Scene {
         this.EnergyBall = new EnergyBall(100, -100, 1,0,100000000,3,50,60,10,"file:Img/NRJ.png");
         this.camera = new Camera(100,0);
 
-        this.left=new StaticThing("file:Img/desert.png",-desertSizeX,0);
+        this.left=new StaticThing("file:Img/desert.png",-desertSizeX,0,0,0);
         left.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(left.getImageView());
 
-        this.middle=new StaticThing("file:Img/desert.png",0,0);
+        this.middle=new StaticThing("file:Img/desert.png",0,0,0,0);
         middle.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(middle.getImageView());
 
-        this.right=new StaticThing("file:Img/desert.png",desertSizeX,0);
+        this.right=new StaticThing("file:Img/desert.png",desertSizeX,0,0,0);
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
 
-        this.Rock=new StaticThing("file:Img/Rock.png",desertSizeX- camera.getX(),270);
+        this.Rock=new StaticThing("file:Img/Rock.png",desertSizeX,270,100,100);
         Rock.getImageView().setFitWidth(100);
         Rock.getImageView().setFitHeight(100);
         Rock.getImageView().setRotate(-90);
