@@ -28,10 +28,10 @@ public class Foe extends  AnimatedThing{
     @Override
     public void updateAttitude() {
         if (v_y>0){
-            attitute=Attitude.JUMPING_DOWN;
+            attitute=Attitude.JUMPING_UP;
         }
         else if (v_y<0){
-            attitute=Attitude.JUMPING_UP;
+            attitute=Attitude.JUMPING_DOWN;
         }
         else{
             attitute=Attitude.RUNNING;

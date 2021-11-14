@@ -30,13 +30,13 @@ public class Hero extends  AnimatedThing{
     }
     @Override
     public void updateAttitude() {
-        if (v_y<0){
+        if (v_y>0){
             attitute=Attitude.JUMPING_DOWN;
             if(attitude==1){
                 attitute=Attitude.DOWNnGUN;
             }
         }
-        else if (v_y>0){
+        else if (v_y<0){
             attitute=Attitude.JUMPING_UP;
             if (attitude==1){
                 attitute=Attitude.UPnGun;

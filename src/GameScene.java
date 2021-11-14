@@ -21,6 +21,7 @@ public class GameScene extends Scene {
     public AnimationTimer timer;
     public Hero hero;
     public Pane pane;
+    public StaticThing Rock;
 
     public GameScene(Pane pane, double v, double v1, boolean b) {
         super(pane, v, v1, b);
@@ -40,6 +41,12 @@ public class GameScene extends Scene {
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
 
+        this.Rock=new StaticThing("file:Img/Rock.png",desertSizeX- camera.getX(),270);
+        Rock.getImageView().setFitWidth(100);
+        Rock.getImageView().setFitHeight(100);
+        Rock.getImageView().setRotate(-90);
+        Rock.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
+        pane.getChildren().add(Rock.getImageView());
 
 
 
