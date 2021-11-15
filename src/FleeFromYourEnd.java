@@ -40,6 +40,7 @@ public class FleeFromYourEnd extends Application {
         primaryStage.setScene(theScene);
         pane.getChildren().add(theScene.hero.getImageView());
         pane.getChildren().add(theScene.EnergyBall.getImageView());
+        pane.getChildren().add(theScene.Rock.getImageView());
 
 
         AnimationTimer timer = new AnimationTimer() {
@@ -48,6 +49,7 @@ public class FleeFromYourEnd extends Application {
                 theScene.EnergyBall.update(time);
                 theScene.camera.update(time, theScene.hero);
                 theScene.Permute_Images();
+                theScene.Rock.update(time);
 
             }
         };

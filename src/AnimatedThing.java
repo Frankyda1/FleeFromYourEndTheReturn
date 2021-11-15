@@ -19,6 +19,8 @@ public abstract class AnimatedThing {
     public ImageView imageView;
     public AnimationTimer timer;
     public Boolean hit;
+    public int pv =6;
+
 
 
     public AnimatedThing(double x,double y , int attitude,long a,double duration, int maxa,double sizex ,double siezy,int offset,String filename){
@@ -48,16 +50,15 @@ public abstract class AnimatedThing {
         return y;
     }
 
-    public void Hitbox(int x1,int y1, int sizex1, int sizey1) {
-        if (0 < x - x1 | x - x1 < sizex1) {
-            if (0 < y - y1 | y - y1 < sizey1) {
-                hit=Boolean.TRUE;
-            }
-        }
-        else{
-            hit=Boolean.FALSE;
-        }
+    public void SetPV(int pv){
+        this.pv=pv;
     }
+
+    public Rectangle2D GetHitbox (){
+        Rectangle2D h=new Rectangle2D(x,y,sizex,sizey);
+        return h;
+    }
+
     public void update(long t){
         a=(int) ((t%(maxa*duration))/duration);
 

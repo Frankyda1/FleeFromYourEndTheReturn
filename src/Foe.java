@@ -33,10 +33,7 @@ public class Foe extends  AnimatedThing{
         else if (v_y<0){
             attitute=Attitude.JUMPING_DOWN;
         }
-        else{
-            attitute=Attitude.RUNNING;
-        }
-        if (v_x==0){
+        else if (attitude ==1){
             attitute=Attitude.STILL;
         }
     }
@@ -44,8 +41,6 @@ public class Foe extends  AnimatedThing{
     public void update(long t) {
         super.update(t);
         updateAttitude();
-        a_x=f_x/m;
-        v_x+=a_x;
         x += v_x;
 
         a_y =(g-f_y /m);
