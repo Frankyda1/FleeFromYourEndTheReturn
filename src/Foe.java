@@ -47,8 +47,8 @@ public class Foe extends  AnimatedThing{
             norm=Math.sqrt((int)Math.pow(x1-x,2)+(int)Math.pow(y1-y,2));
             cos=(x1-x)/norm;
             sin=(y1-y)/norm;
-            v_x=5*cos*v_x;
-            v_y=5*sin*v_x;
+            v_x=3*cos*v_x;
+            v_y=3*sin*v_x;
             attitude=3;
         }
         else if ((x-x1<-10 | x-x1>200)&attitude==3){

@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 public class FleeFromYourEnd extends Application {
     MediaPlayer mediaPlayer;
     private Boolean Start=false;
+    private int NewFoe=0;
     public void music(){
         try {
             String s = "Music/JoJo.mp3";
@@ -90,7 +91,10 @@ public class FleeFromYourEnd extends Application {
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long time) {
                 if((Start)&(theScene.hero.pv>0)) {
-
+                    if(theScene.Difficulty.GetDiff()-NewFoe>0){
+                        pane.getChildren().add(theScene.Difficulty.Foes[theScene.Difficulty.Foes.length-1].getImageView());
+                        NewFoe++;
+                    }
                     theScene.hero.update(time, theScene.camera);
                     theScene.EnergyBall.update(time, theScene.camera);
                     theScene.camera.update(time, theScene.hero);
