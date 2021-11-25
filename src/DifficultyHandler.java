@@ -12,8 +12,10 @@ public class DifficultyHandler {
     public DifficultyHandler(){
         Foes[0]=Raven;
         Foes[0].SetLocky();
+
         Foes[1]=Cactus;
         Foes[1].SetLocky();
+        Foes[1].Invincibility=true;
 
     }
 

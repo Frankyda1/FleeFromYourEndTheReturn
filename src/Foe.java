@@ -64,8 +64,9 @@ public class Foe extends  AnimatedThing{
             x-=3*v_x;
             y+=10;
         }
-
-        x += v_x;
+        else {
+            x += v_x;
+        }
         setForce(0,0);
     }
 }

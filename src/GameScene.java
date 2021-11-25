@@ -19,6 +19,7 @@ public class GameScene extends Scene {
     public StaticThing left;
     public StaticThing middle;
     public StaticThing right;
+    public StaticThing StartScreen;
     public Hero hero;
     public StaticThing HP_BAR;
     public DifficultyHandler Difficulty;
@@ -42,6 +43,10 @@ public class GameScene extends Scene {
         this.right=new StaticThing("file:Img/desert.png",desertSizeX,0,0,0);
         right.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
         pane.getChildren().add(right.getImageView());
+
+        this.StartScreen=new StaticThing("file:Img/Start.png",0,0,0,0);
+        StartScreen.getImageView().setViewport(new Rectangle2D(0,0,2*desertSizeX,desertSizeY));
+
 
         this.HP_BAR=new StaticThing("file:Img/BarreDePv.png",20,0,180,200);
         pane.getChildren().add(HP_BAR.getImageView());
