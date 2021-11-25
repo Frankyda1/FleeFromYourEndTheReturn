@@ -25,14 +25,11 @@ public class GameScene extends Scene {
 
     public GameScene(Pane pane, double v, double v1, boolean b) {
         super(pane, v, v1, b);
-        this.hero = new Hero(110,250,0,0,100000000,6,77,100,77,100,10,"file:Img/heros.png");;
+        this.hero =       new Hero(110,250,0,0,100000000,6,77,100,77,100,10,"file:Img/heros.png");;
         this.EnergyBall = new EnergyBall(100, -100, 1,0,100000000,3,50,60,50,60,10,"file:Img/NRJ.png");
-        this.camera = new Camera(0,0);
-        this.Difficulty=new DifficultyHandler();
-
-
+        this.camera =     new Camera(0,0);
+        this.Difficulty=  new DifficultyHandler();
         EnergyBall.SetLocky();
-
 
         this.left=new StaticThing("file:Img/desert.png",-desertSizeX,0,0,0);
         left.getImageView().setViewport(new Rectangle2D(0,0,desertSizeX,desertSizeY));
@@ -48,8 +45,6 @@ public class GameScene extends Scene {
 
         this.HP_BAR=new StaticThing("file:Img/BarreDePv.png",20,0,180,200);
         pane.getChildren().add(HP_BAR.getImageView());
-
-
 
 
         //Stop gunnning when key released
@@ -84,28 +79,30 @@ public class GameScene extends Scene {
         });
     }
 
-    public StaticThing getLeft() {
-        return left;
-    }
-
-    public StaticThing getRight() {
-        return right;
-    }
-
     public void Update_Images() {
         // Permutation des images
+        hero.getImageView().setX(hero.getX() - camera.getX());
+        hero.getImageView().setY(hero.getY() - camera.getY());
+
         right.getImageView().setY(-camera.getY());
         middle.getImageView().setY(-camera.getY());
         left.getImageView().setY(-camera.getY());
-        hero.getImageView().setX(hero.getX() - camera.getX());
-        hero.getImageView().setY(hero.getY() - camera.getY());
+
         EnergyBall.getImageView().setX((EnergyBall.getX() - camera.getX()));
         EnergyBall.getImageView().setY((EnergyBall.getY() - camera.getY()));
+
         hero.setSpeed(GameSpeed);
+
         camera.setSpeed(GameSpeed);
+
+
         GameSpeed=10+Difficulty.GetDiff()*5;
+
+
         HP_BAR.getImageView().setViewport(new Rectangle2D(30, 220 - (6 - hero.pv) * 41, 135, 30));
+
         if (camera.getX() > desertSizeX * CNT) {
+
             CNT += 1;
         }
         if (CNT % 3 == 0) {
@@ -139,7 +136,7 @@ public class GameScene extends Scene {
             if (hero.GetHitbox().intersects(Difficulty.Foes[a].GetHitbox())) {
                 if(!hero.Invincibility) {
                     hero.SetPV(hero.pv - 1);
-                    hero.Invincibility = Boolean.TRUE;
+                    hero.Invincibility = true;
 
                 }
             }

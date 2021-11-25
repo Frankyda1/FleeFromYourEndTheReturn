@@ -61,7 +61,7 @@ public class Foe extends  AnimatedThing{
             this.imageView.setViewport(new Rectangle2D(a*(sizex+14),0,sizex,sizey));
         }
         if(attitute== Attitude.DIVING ){
-            x+=3*v_x;
+            x-=3*v_x;
             y+=10;
         }
 

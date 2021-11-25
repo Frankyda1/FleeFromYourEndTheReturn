@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class DifficultyHandler {
     private int Diff=0;
-    private int Score;
+    public int Score;
     public Label A = new Label(""+Score);
     Foe Cactus =new Foe(900,270,1,0,100000000,6,594,600,100,100,10,"file:Img/Rock.png");
     Foe Raven = new Foe(900,100,2,0,100000000, 8,193,200,100,100,10,"file:Img/Raveny.png");

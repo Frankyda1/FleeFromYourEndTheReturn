@@ -1,8 +1,10 @@
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Rectangle2D;
 
 
 public class Hero extends  AnimatedThing{
     public double Add_v_x;
+    public Boolean gameOver;
 
     public Hero(double x, double y, int attitude, int a, double duration, int maxa, double sizex, double siezy,double Hitx,double Hity, int offset, String filename) {
         super(x, y, attitude, a, duration, maxa, sizex, siezy,Hitx,Hity, offset, filename);
@@ -59,7 +61,6 @@ public class Hero extends  AnimatedThing{
         updateAttitude();
 
         if (this.x- camera.getX() < 100 ) {
-
             a_x=0;
             v_x=camera.GetSpeed();
             x+=v_x+1;
@@ -70,7 +71,7 @@ public class Hero extends  AnimatedThing{
             x+=v_x-1;
         }
         else{
-            a_x = f_x / m;
+            a_x = f_x / masse;
             v_x += a_x;
             this.x += v_x+Add_v_x;
         }
@@ -83,7 +84,9 @@ public class Hero extends  AnimatedThing{
         else if (attitute==Attitude.RUNnGUN){
             this.imageView.setViewport(new Rectangle2D(a*(sizex+10),330,sizex-7,100));
         }
-
+        if (pv==0){
+            gameOver=true;
+        }
 
         setForce(0,0);
     }

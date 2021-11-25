@@ -113,19 +113,19 @@ public abstract class AnimatedThing {
             v_y=0;
             y=yGround+sizey;
         }
-        if(Invincibility==Boolean.TRUE){
+        if(Invincibility==true){
 
-            if(a==2|a==3|a==4){
+            if(m%20<10){
                 this.imageView.setVisible(false);
                 m++;
             }
-            else if(a==0|a==1|a==5){
+            else if(m%20>=10){
                 this.imageView.setVisible(true);
                 m++;
             }
-            if(m==3){
+            if(m==60){
                 this.imageView.setVisible(true);
-                Invincibility =Boolean.FALSE;
+                Invincibility =false;
                 m=0;
             }
         }
