@@ -87,6 +87,22 @@ public class Hero extends  AnimatedThing{
         if (pv==0){
             gameOver=true;
         }
+        if(Invincibility){
+
+            if(m%20<10){
+                this.imageView.setVisible(false);
+                m++;
+            }
+            else if(m%20>=10){
+                this.imageView.setVisible(true);
+                m++;
+            }
+            if(m==60){
+                this.imageView.setVisible(true);
+                Invincibility =false;
+                m=0;
+            }
+        }
 
         setForce(0,0);
     }

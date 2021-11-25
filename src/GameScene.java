@@ -134,6 +134,7 @@ public class GameScene extends Scene {
 
             Difficulty.Foes[a].getImageView().setX((Difficulty.Foes[a].getX() - camera.getX()));
             Difficulty.Foes[a].getImageView().setY((Difficulty.Foes[a].getY() - camera.getY()));
+            Difficulty.Foes[a].Dive(hero.getX(), hero.getY());
             if (Difficulty.Foes[a].getX()<0){
                 Difficulty.Foes[a].Reset(0);
             }
@@ -146,10 +147,14 @@ public class GameScene extends Scene {
                 }
             }
             if (EnergyBall.GetHitbox().intersects(Difficulty.Foes[a].GetHitbox())) {
-                Difficulty.Foes[a].Reset(hero.getX());
-                Difficulty.Foes[a].imageView.setVisible(false);
-                Difficulty.Foes[a].Reset(0);
-                Difficulty.AddScore();
+                EnergyBall.reset();
+                EnergyBall.CanShoot = Boolean.TRUE;
+                if (!Difficulty.Foes[a].Invincibility) {
+                    Difficulty.Foes[a].Reset(hero.getX());
+                    Difficulty.Foes[a].imageView.setVisible(false);
+                    Difficulty.Foes[a].Reset(0);
+                    Difficulty.AddScore();
+                }
 
                 System.out.println("Touché");
             }

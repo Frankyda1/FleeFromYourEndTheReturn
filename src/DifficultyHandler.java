@@ -36,6 +36,9 @@ public class DifficultyHandler {
         if (foe.IsAvailable==1) {
             foe.setX(x+1600);
             foe.IsAvailable = 0;
+            if(foe.attitude==2){
+                foe.setY((int)(Math.random()*200));
+            }
         }
     }
     public int GetDiff(){
