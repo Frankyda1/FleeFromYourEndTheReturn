@@ -5,6 +5,7 @@ public class Foe extends  AnimatedThing{
     private final double m=20;
     public double v_x = 1,v_y;
     public int IsAvailable;
+    private double TAN;
     private double a_x,a_y;
     private double f_x,f_y;
     protected final int yGround=150;
@@ -39,6 +40,10 @@ public class Foe extends  AnimatedThing{
         Rectangle2D h=new Rectangle2D(super.x,super.y,40,70);
         return h;
     }
+    public void Dive(double x1,double x2,double y1,double y2){
+        TAN=(x1-x2)/(y1-y2);
+        this.imageView.setRotate(TAN);
+    }
     @Override
     public void updateAttitude() {
         if (attitude==2){
@@ -55,7 +60,10 @@ public class Foe extends  AnimatedThing{
         if(attitute == Attitude.FLYING){
             this.imageView.setViewport(new Rectangle2D(a*(sizex+14),0,sizex,sizey));
         }
-        if(attitute== Attitude.DIVING ){}
+        if(attitute== Attitude.DIVING ){
+            x+=3*v_x;
+            y+=10;
+        }
 
         x += v_x;
         setForce(0,0);

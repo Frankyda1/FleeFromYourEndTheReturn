@@ -1,9 +1,7 @@
-import javafx.animation.AnimationTimer;
+
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyCode;
@@ -16,15 +14,12 @@ public class GameScene extends Scene {
     public Camera camera ;
     private final int desertSizeX=800;
     private final int desertSizeY=400;
-    private Rectangle2D HPview ;
     public double GameSpeed=10;
     public EnergyBall EnergyBall;
     public StaticThing left;
     public StaticThing middle;
     public StaticThing right;
-    public AnimationTimer timer;
     public Hero hero;
-    public Pane pane;
     public StaticThing HP_BAR;
     public DifficultyHandler Difficulty;
 
@@ -52,7 +47,6 @@ public class GameScene extends Scene {
         pane.getChildren().add(right.getImageView());
 
         this.HP_BAR=new StaticThing("file:Img/BarreDePv.png",20,0,180,200);
-        HP_BAR.getImageView().setViewport(HPview);
         pane.getChildren().add(HP_BAR.getImageView());
 
 
@@ -84,6 +78,7 @@ public class GameScene extends Scene {
                 }
                 else if(keyEvent.getCode()==KeyCode.SPACE){
                     hero.jump();
+
                 }
             }
         });
@@ -102,7 +97,14 @@ public class GameScene extends Scene {
         right.getImageView().setY(-camera.getY());
         middle.getImageView().setY(-camera.getY());
         left.getImageView().setY(-camera.getY());
-
+        hero.getImageView().setX(hero.getX() - camera.getX());
+        hero.getImageView().setY(hero.getY() - camera.getY());
+        EnergyBall.getImageView().setX((EnergyBall.getX() - camera.getX()));
+        EnergyBall.getImageView().setY((EnergyBall.getY() - camera.getY()));
+        hero.setSpeed(GameSpeed);
+        camera.setSpeed(GameSpeed);
+        GameSpeed=10+Difficulty.GetDiff()*5;
+        HP_BAR.getImageView().setViewport(new Rectangle2D(30, 220 - (6 - hero.pv) * 41, 135, 30));
         if (camera.getX() > desertSizeX * CNT) {
             CNT += 1;
         }
@@ -121,13 +123,6 @@ public class GameScene extends Scene {
             right.getImageView().setX(desertSizeX * (CNT - 1) - camera.getX());
 
         }
-
-        hero.getImageView().setX(hero.getX() - camera.getX());
-        hero.getImageView().setY(hero.getY() - camera.getY());
-
-        EnergyBall.getImageView().setX((EnergyBall.getX() - camera.getX()));
-        EnergyBall.getImageView().setY((EnergyBall.getY() - camera.getY()));
-
         if (EnergyBall.getX() > camera.getX() + 2*desertSizeX) {
             EnergyBall.reset();
             EnergyBall.CanShoot = Boolean.TRUE;
@@ -142,7 +137,11 @@ public class GameScene extends Scene {
             }
 
             if (hero.GetHitbox().intersects(Difficulty.Foes[a].GetHitbox())) {
-                hero.SetPV(hero.pv - 1);
+                if(!hero.Invincibility) {
+                    hero.SetPV(hero.pv - 1);
+                    hero.Invincibility = Boolean.TRUE;
+
+                }
             }
             if (EnergyBall.GetHitbox().intersects(Difficulty.Foes[a].GetHitbox())) {
                 Difficulty.Foes[a].Reset(hero.getX());
@@ -155,15 +154,7 @@ public class GameScene extends Scene {
             if(Difficulty.Foes[a].getX()< camera.getX()){
                 Difficulty.Foes[a].Reset(-100);
             }
-
-            Difficulty.Foes[a].getImageView().setX((Difficulty.Foes[a].getX() - camera.getX()));
-            Difficulty.Foes[a].getImageView().setY((Difficulty.Foes[a].getY() - camera.getY()));
         }
-        hero.setSpeed(GameSpeed);
-        camera.setSpeed(GameSpeed);
-        GameSpeed=10+Difficulty.GetDiff()*5;
-        HP_BAR.getImageView().setViewport(new Rectangle2D(30, 220 - (6 - hero.pv) * 41, 135, 30));
-
     }
 }
 

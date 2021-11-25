@@ -26,12 +26,7 @@ public class EnergyBall extends AnimatedThing{
         }
     }
 
-    public void SetSpeed(double vx){
-        this.v_x=vx;
-    }
-    public void Launch(double x, double y, int attitude, long a, double duration, int maxa, double sizex, double siezy, double Hitx,double Hity, int offset, String filename){
-        EnergyBall Ball= new EnergyBall(x, y, attitude, a, duration, maxa, sizex, siezy, Hitx,Hity, offset, filename);
-    }
+
     @Override
     public void update(long t,Camera camera) {
         super.update(t,camera);

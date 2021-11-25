@@ -1,21 +1,11 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
-
-import java.awt.*;
 import java.nio.file.Paths;
-import java.io.File;
-import java.net.URI;
 
 public class FleeFromYourEnd extends Application {
     MediaPlayer mediaPlayer;
@@ -41,8 +31,8 @@ public class FleeFromYourEnd extends Application {
 
         GameScene theScene = new GameScene(pane, 1600, 400, true);
         primaryStage.setScene(theScene);
-        pane.getChildren().add(theScene.hero.getImageView());
         pane.getChildren().add(theScene.EnergyBall.getImageView());
+        pane.getChildren().add(theScene.hero.getImageView());
         for (int i=0;i<theScene.Difficulty.Foes.length;i++){
             pane.getChildren().add(theScene.Difficulty.Foes[i].getImageView());
 

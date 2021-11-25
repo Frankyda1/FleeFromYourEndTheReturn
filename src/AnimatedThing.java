@@ -1,6 +1,5 @@
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public abstract class AnimatedThing {
@@ -12,7 +11,7 @@ public abstract class AnimatedThing {
     protected double a_x,a_y;
     protected double f_x,f_y;
     protected final double g=0.5;
-    protected final double m=20;
+    protected final double masse=20;
     protected int Locky;
     public double Hitx;
     public double Hity;
@@ -29,6 +28,8 @@ public abstract class AnimatedThing {
     public Boolean hit;
     public int pv =6;
     protected final int yGround=150;
+    public Boolean Invincibility =false;
+    int m=0;
 
 
 
@@ -104,7 +105,7 @@ public abstract class AnimatedThing {
             v_y = 0;
         }
         else if(y< yGround+sizey | f_y>0){
-            a_y =(g-f_y /m);
+            a_y =(g-f_y /masse);
             v_y += a_y;
             y += v_y;
         }
@@ -112,7 +113,24 @@ public abstract class AnimatedThing {
             v_y=0;
             y=yGround+sizey;
         }
+        if(Invincibility==Boolean.TRUE){
+
+            if(a==2|a==3|a==4){
+                this.imageView.setVisible(false);
+                m++;
+            }
+            else if(a==0|a==1|a==5){
+                this.imageView.setVisible(true);
+                m++;
+            }
+            if(m==3){
+                this.imageView.setVisible(true);
+                Invincibility =Boolean.FALSE;
+                m=0;
+            }
+        }
     }
+
     public abstract void updateAttitude();
 
 }

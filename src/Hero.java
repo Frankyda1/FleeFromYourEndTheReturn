@@ -1,11 +1,8 @@
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 
-import java.awt.*;
 
 public class Hero extends  AnimatedThing{
     public double Add_v_x;
-
 
     public Hero(double x, double y, int attitude, int a, double duration, int maxa, double sizex, double siezy,double Hitx,double Hity, int offset, String filename) {
         super(x, y, attitude, a, duration, maxa, sizex, siezy,Hitx,Hity, offset, filename);
@@ -22,17 +19,13 @@ public class Hero extends  AnimatedThing{
             Add_v_x=H;
         }
     }
-    public void Invincibility(){}
+
 
     public void addSpeed(double Add_v_x) {
         if (Math.abs(this.Add_v_x) <= 4 ) {
             this.Add_v_x += Add_v_x;
         }
     }
-    public double getV_x(){
-        return (v_x);
-    }
-
 
     @Override
     public void updateAttitude() {
@@ -64,7 +57,7 @@ public class Hero extends  AnimatedThing{
     public void update(long t,Camera camera) {
         super.update(t,camera);
         updateAttitude();
-        System.out.println(Add_v_x);
+
         if (this.x- camera.getX() < 100 ) {
 
             a_x=0;
@@ -90,6 +83,7 @@ public class Hero extends  AnimatedThing{
         else if (attitute==Attitude.RUNnGUN){
             this.imageView.setViewport(new Rectangle2D(a*(sizex+10),330,sizex-7,100));
         }
+
 
         setForce(0,0);
     }

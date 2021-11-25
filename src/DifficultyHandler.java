@@ -7,11 +7,13 @@ public class DifficultyHandler {
     public Label A = new Label(""+Score);
     Foe Cactus =new Foe(900,270,1,0,100000000,6,594,600,100,100,10,"file:Img/Rock.png");
     Foe Raven = new Foe(900,100,2,0,100000000, 8,193,200,100,100,10,"file:Img/Raveny.png");
-    Foe[] Foes=new Foe[1];
+    Foe[] Foes=new Foe[2];
 
     public DifficultyHandler(){
         Foes[0]=Raven;
         Foes[0].SetLocky();
+        Foes[1]=Cactus;
+        Foes[1].SetLocky();
 
     }
 
@@ -31,7 +33,6 @@ public class DifficultyHandler {
     public void Spawn(Foe foe,double x){
         if (foe.IsAvailable==1) {
             foe.setX(x+1600);
-            foe.setY((int)(Math.random()*350+20));
             foe.IsAvailable = 0;
         }
     }
@@ -51,5 +52,4 @@ public class DifficultyHandler {
             Foes[Foes.length].SetLocky();
         }
     }
-
 }
