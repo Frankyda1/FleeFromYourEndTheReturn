@@ -101,7 +101,7 @@ public class GameScene extends Scene {
         camera.setSpeed(GameSpeed);
 
 
-        GameSpeed=10+Difficulty.GetDiff()*5;
+        GameSpeed=10+Difficulty.GetDiff()*2;
 
 
         HP_BAR.getImageView().setViewport(new Rectangle2D(30, 220 - (6 - hero.pv) * 41, 135, 30));

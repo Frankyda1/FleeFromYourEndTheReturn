@@ -56,7 +56,7 @@ public abstract class AnimatedThing {
     }
 
     public void jump(){
-        if (y>=yGround ){
+        if (y>=0){
             f_y +=250;
         }
     }

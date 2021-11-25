@@ -4,7 +4,9 @@ import java.lang.Math;
 public class DifficultyHandler {
     private int Diff=0;
     public int Score;
+    int value =0;
     public Label A = new Label(""+Score);
+
     Foe Cactus =new Foe(1600,270,1,0,100000000,6,594,600,100,100,10,"file:Img/Rock.png");
     Foe Raven = new Foe(1600,100,2,0,100000000, 8,193,200,100,100,10,"file:Img/Raveny.png");
     Foe[] Foes=new Foe[2];
@@ -33,8 +35,9 @@ public class DifficultyHandler {
         }
     }
     public void Spawn(Foe foe,double x){
+        int Offset=(int)(Math.random()*300);
         if (foe.IsAvailable==1) {
-            foe.setX(x+1600);
+            foe.setX(Offset+x+1600);
             foe.IsAvailable = 0;
             if(foe.attitude==2){
                 foe.setY((int)(Math.random()*200));
@@ -47,18 +50,22 @@ public class DifficultyHandler {
     }
 
     public void AddFoe(){
-        int value =0;
+
         Foe[] tmp= new Foe[Foes.length+1];
         for (int i=0;i<Foes.length;i++){
             tmp[i]=Foes[i];
         }
         if(value%2==0){
             tmp[Foes.length]=new Foe(1600,270,1,0,100000000,6,594,600,100,100,10,"file:Img/Rock.png");
+            tmp[Foes.length].Invincibility=true;
+            value++;
         }
         else{
             tmp[Foes.length]=new Foe(1600,100,2,0,100000000, 8,193,200,100,100,10,"file:Img/Raveny.png");
+            value++;
         }
         Foes=tmp;
+        Foes[Foes.length-1].SetLocky();
         Spawn(Foes[Foes.length-1],0);
         if(Foes[value].attitude==2){
             Foes[Foes.length-1].SetLocky();
