@@ -1,33 +1,39 @@
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+
+import java.awt.*;
+
 public class Hero extends  AnimatedThing{
-    private final double g=0.5;
-    private final double m=20;
-    private int Gun;
-    private double v_x,v_y;
-    private double a_x,a_y;
-    private double f_x,f_y;
-    protected final int yGround=150;
+    public double Add_v_x;
 
-    public Hero(double x, double y, int attitude, int a, double duration, int maxa, double sizex, double siezy, int offset, String filename) {
-        super(x, y, attitude, a, duration, maxa, sizex, siezy, offset, filename);
+
+    public Hero(double x, double y, int attitude, int a, double duration, int maxa, double sizex, double siezy,double Hitx,double Hity, int offset, String filename) {
+        super(x, y, attitude, a, duration, maxa, sizex, siezy,Hitx,Hity, offset, filename);
     }
 
-    public void jump(){
-        if (y>=yGround + sizey){
-            f_y +=250;
-        }
-
-    }
     public void setForce(double f_x,double f_y){
-        this.f_x=f_x;
-        this.f_y=f_y;
+        super.f_x=f_x;
+        super.f_y=f_y;
     }
+    public void Turn(double H){
+        if(Add_v_x*H<0){
+            f_x=0;
+            a_x=0;
+            Add_v_x=H;
+        }
+    }
+    public void Invincibility(){}
 
-    public void addForce(double f_x) {
-        this.f_x+=f_x;
+    public void addSpeed(double Add_v_x) {
+        if (Math.abs(this.Add_v_x) <= 4 ) {
+            this.Add_v_x += Add_v_x;
+        }
     }
-    public double setV_x(){
+    public double getV_x(){
         return (v_x);
     }
+
+
     @Override
     public void updateAttitude() {
         if (v_y>0){
@@ -53,25 +59,38 @@ public class Hero extends  AnimatedThing{
             attitute=Attitude.STILL;
         }
     }
+
     @Override
-    public void update(long t) {
-        super.update(t);
+    public void update(long t,Camera camera) {
+        super.update(t,camera);
         updateAttitude();
-        a_x=f_x/m;
-        v_x+=a_x;
-        x += v_x;
+        System.out.println(Add_v_x);
+        if (this.x- camera.getX() < 100 ) {
 
-        a_y =(g-f_y /m);
-        v_y += a_y;
-        y += v_y;
-
-        if (y > yGround + sizey) {
-            if (v_y > 0) {
-                v_y = 0;
-            }
-            y = yGround + sizey;
+            a_x=0;
+            v_x=camera.GetSpeed();
+            x+=v_x+1;
         }
+        else if(this.x- camera.getX() > 1500){
+            a_x=0;
+            v_x=camera.GetSpeed();
+            x+=v_x-1;
+        }
+        else{
+            a_x = f_x / m;
+            v_x += a_x;
+            this.x += v_x+Add_v_x;
+        }
+         if (attitute==Attitude.UPnGun){
+            this.imageView.setViewport(new Rectangle2D(offset,480,sizex,sizey));
+        }
+        else if (attitute==Attitude.DOWNnGUN){
+            this.imageView.setViewport(new Rectangle2D(95,480,sizex,sizey));
+        }
+        else if (attitute==Attitude.RUNnGUN){
+            this.imageView.setViewport(new Rectangle2D(a*(sizex+10),330,sizex-7,100));
+        }
+
         setForce(0,0);
     }
-
 }

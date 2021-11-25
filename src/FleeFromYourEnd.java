@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
+
+import java.awt.*;
 import java.nio.file.Paths;
 import java.io.File;
 import java.net.URI;
@@ -36,20 +38,28 @@ public class FleeFromYourEnd extends Application {
         Group root = new Group();
         Pane pane = new Pane(root);
 
-        GameScene theScene = new GameScene(pane, 800, 400, true);
+
+        GameScene theScene = new GameScene(pane, 1600, 400, true);
         primaryStage.setScene(theScene);
         pane.getChildren().add(theScene.hero.getImageView());
         pane.getChildren().add(theScene.EnergyBall.getImageView());
-        pane.getChildren().add(theScene.Rock.getImageView());
+        for (int i=0;i<theScene.Difficulty.Foes.length;i++){
+            pane.getChildren().add(theScene.Difficulty.Foes[i].getImageView());
 
+        }
 
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long time) {
-                theScene.hero.update(time);
-                theScene.EnergyBall.update(time);
-                theScene.camera.update(time, theScene.hero);
-                theScene.Permute_Images();
-                theScene.Rock.update(time);
+                theScene.hero.update(time,theScene.camera);
+                theScene.EnergyBall.update(time, theScene.camera);
+                theScene.camera.update(time,theScene.hero);
+                theScene.Update_Images();
+                theScene.Difficulty.UpdateDiff(time);
+
+                for (int a=0;a<theScene.Difficulty.Foes.length;a++){
+                    theScene.Difficulty.Foes[a].update(time, theScene.camera);
+                    theScene.Difficulty.Spawn(theScene.Difficulty.Foes[a],theScene.camera.getX());
+                }
 
             }
         };
@@ -57,8 +67,6 @@ public class FleeFromYourEnd extends Application {
         primaryStage.show();
         music();
     }
-
-
 
     public static void main(String[] args) {
         launch(args);

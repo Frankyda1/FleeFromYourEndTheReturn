@@ -1,10 +1,8 @@
 public class Camera {
     private int x;
     private int y;
-
     private double vx,vy;
     private double ax,ay;
-
     private final double k=1;
     private final double m=20;
     private final double f=10;
@@ -19,6 +17,12 @@ public class Camera {
         this.x = x;
         this.y = y;
     }
+    public void setSpeed(double v_x){
+        this.vx=v_x;
+    }
+    public double GetSpeed(){
+        return vx;
+    }
     @Override
     public String toString(){
         return "("+x+";"+y+")";
@@ -26,15 +30,9 @@ public class Camera {
 
 
     public void update(long time,Hero hero){
-        double x_hero=hero.getX();
-        double y_hero=hero.getY();
 
-        double c1=k/m;
-        double c2=f/m;
 
-        ax=c1*(x_hero-x)-c2*vx;
-        vx+=ax;
+
         x+=vx;
-
     }
 }

@@ -1,59 +1,63 @@
+import javafx.geometry.Rectangle2D;
+
 public class Foe extends  AnimatedThing{
     private final double g=0.7;
     private final double m=20;
-    private double v_x,v_y;
+    public double v_x = 1,v_y;
+    public int IsAvailable;
     private double a_x,a_y;
     private double f_x,f_y;
     protected final int yGround=150;
 
-    public Foe (double x, double y, int attitude, int a, double duration, int maxa, double sizex, double siezy, int offset, String filename) {
-        super(x, y, attitude, a, duration, maxa, sizex, siezy, offset, filename);
+    public Foe (double x, double y, int attitude, long a, double duration, int maxa, double sizex, double siezy, double Hitx,double Hity, int offset, String filename) {
+        super(x, y, attitude, a, duration, maxa, sizex, siezy,Hitx,Hity, offset, filename);
     }
-
     public void jump(){
         if (y>=yGround + sizey){
             f_y +=200;
         }
-
     }
     public void setForce(double f_x,double f_y){
         this.f_x=f_x;
         this.f_y=f_y;
     }
-
+    public void setX(double x){this.x=x;}
+    public void setY(double y){this.y=y;}
+    public void setSpeed(double v_x){
+        this.v_x=v_x;
+    }
     public void addForce(double f_x) {
         this.f_x+=f_x;
     }
-
+    public void Reset(double x){
+        super.x=x-100;
+        super.y=270;
+        super.imageView.setVisible(true);
+        IsAvailable=1;
+    }
+    public Rectangle2D GetHitbox (){
+        Rectangle2D h=new Rectangle2D(super.x,super.y,40,70);
+        return h;
+    }
     @Override
     public void updateAttitude() {
-        if (v_y>0){
-            attitute=Attitude.JUMPING_UP;
+        if (attitude==2){
+            attitute=Attitude.FLYING;
         }
-        else if (v_y<0){
-            attitute=Attitude.JUMPING_DOWN;
-        }
-        else if (attitude ==1){
-            attitute=Attitude.STILL;
+        if(attitude==3){
+            attitute=Attitude.DIVING;
         }
     }
     @Override
-    public void update(long t) {
-        super.update(t);
+    public void update(long t,Camera camera) {
+        super.update(t,camera);
         updateAttitude();
-        x += v_x;
-
-        a_y =(g-f_y /m);
-        v_y += a_y;
-        y += v_y;
-
-        if (y > yGround + sizey) {
-            if (v_y > 0) {
-                v_y = 0;
-            }
-            y = yGround + sizey;
+        if(attitute == Attitude.FLYING){
+            this.imageView.setViewport(new Rectangle2D(a*(sizex+14),0,sizex,sizey));
         }
+        if(attitute== Attitude.DIVING ){}
+
+        x += v_x;
         setForce(0,0);
     }
-
 }
